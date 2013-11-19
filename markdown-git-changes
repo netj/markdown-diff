@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# Summarize commit history and diff of given Markdown files in Git
+# Summarize commit history and diff of Markdown files in the current Git repo
+# Usage:
+#     markdown-git-changes [COMMIT [MARKDOWN_FILE]...]
+#
 # Author: Jaeho Shin <netj@cs.stanford.edu>
 # Created: 2013-11-18
 set -eu
@@ -7,12 +10,40 @@ set -eu
 Here=$(dirname "$0")
 PATH="$Here:$PATH" # add this directory to PATH for markdown-wdiff
 
-since=$1; shift
+# TODO passthru any diff options
+
+# how to find markdown files in the current git repo
+files=()
+find_markdown_files() {
+    local IFS=$'\n'
+    set -- $(git ls-files | grep '\.\(md\|mkd\|markdn\|markdown\)$')
+    files=("$@")
+}
+
+# diff against upstream branch, or HEAD^ if no local changes, or HEAD
+if [ $# -gt 0 ]; then
+    since=$1; shift
+    # find Markdown documents in git repo, unless specified
+    if [ $# -gt 0 ]; then
+        files=("$@")
+    else
+        find_markdown_files
+    fi
+else
+    find_markdown_files
+    since=`
+        git rev-parse --abbrev-ref HEAD@{upstream} 2>/dev/null ||
+        case $(git status --porcelain --untracked-files=no "${files[@]}" | wc -l) in
+            0) echo 'HEAD^' ;;
+            *) echo 'HEAD'
+        esac
+    `
+fi
 
 # summarize commit history
 {
     echo "\$ git log --oneline "$since"..HEAD $*"
-    git log --oneline "$since"..HEAD "$@"
+    git log --oneline "$since"..HEAD "${files[@]}"
 } |
 sed 's/^/    /'
 echo
@@ -20,7 +51,7 @@ echo
 # and embed the overall word diff
 git diff ${GIT_DIFF_OPTS:-} --word-diff --patch-with-stat \
     --minimal --patience \
-    "$since" -- "$@" |
+    "$since" -- "${files[@]}" |
 sed '
     # format prologue
     1,/^diff /{
