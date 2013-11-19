@@ -21,4 +21,28 @@ echo
 git diff ${GIT_DIFF_OPTS:-} --word-diff --patch-with-stat \
     --minimal --patience \
     "$since" -- "$@" |
-markdown-wdiff
+sed '
+    # format prologue
+    1,/^diff /{
+        /^diff/! s/^/    /
+    }
+
+    # format file headers
+    /^diff /,/^+++ /{
+        /^diff /{
+            s|^diff .* \([^/]/\)\(.*\)|<div class="file-start"><code>\2</code></div>|
+            a\
+    \
+
+        }
+        /^<div class="file-start">/! s/^/    /
+    }
+
+    # format hunks
+    /^@@ -.* +.* @@/{
+        s| @@.*| @@|
+        s|^|<div class="hunk-start"><code>|
+        s|$|</code></div>|
+    }
+' |
+markdown-format-wdiff

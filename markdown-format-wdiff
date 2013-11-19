@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Markdown-wdiff -- format diff of Markdown files with decoration
 # Usage:
-#     wdiff old.md new.md | markdown-wdiff
-#     git diff --word-diff origin/master -- README.md docs/tutorial/README.md | markdown-wdiff
+#     wdiff old.md new.md | markdown-format-wdiff
+#     git diff --word-diff origin/master -- README.md docs/tutorial/README.md | markdown-format-wdiff
 #
 # Author: Jaeho Shin <netj@cs.stanford.edu>
 # Created: 2013-11-18
@@ -10,32 +10,9 @@ set -eu
 
 # word diff the given unified diff as input, and format it by hunks
 sed '
-# format prologue
-1,/^diff /{
-    /^diff/! s/^/    /
-}
-
-# format file headers
-/^diff /,/^+++ /{
-    /^diff /{
-        s|^diff .* \([^/]/\)\(.*\)|<div class="file-start"><code>\2</code></div>|
-        a\
-\
-
-    }
-    /^<div class="file-start">/! s/^/    /
-}
-
 # format ins/del of words
 s|\[-|<del class="del">|g; s|-]|</del>|g
 s|{+|<ins class="ins">|g; s|+}|</ins>|g
-
-# format hunks
-/^@@ -.* +.* @@/{
-    s| @@.*| @@|
-    s|^|<div class="hunk-start"><code>|
-    s|$|</code></div>|
-}
 '
 
 # attach a small stylesheet
