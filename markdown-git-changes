@@ -2,13 +2,16 @@
 # Summarize commit history and diff of Markdown files in the current Git repo
 # Usage:
 #     markdown-git-changes [COMMIT [MARKDOWN_FILE]...]
+# 
+# You can specify COMMIT as `--' to automatically see changes of given files
+# against the upstream branch, HEAD^, or HEAD.
 #
 # Author: Jaeho Shin <netj@cs.stanford.edu>
 # Created: 2013-11-18
 set -eu
 
 Here=$(dirname "$0")
-PATH="$Here:$PATH" # add this directory to PATH for markdown-wdiff
+PATH="$Here:$PATH" # add this directory to PATH for markdown-format-wdiff
 
 # TODO passthru any diff options
 
@@ -20,16 +23,9 @@ find_markdown_files() {
     files=("$@")
 }
 
-# diff against upstream branch, or HEAD^ if no local changes, or HEAD
-if [ $# -gt 0 ]; then
-    since=$1; shift
-    # find Markdown documents in git repo, unless specified
-    if [ $# -gt 0 ]; then
-        files=("$@")
-    else
-        find_markdown_files
-    fi
-else
+# diff against given commit, or upstream branch, or HEAD^ if no local changes, or HEAD
+since=--; [ $# -eq 0 ] || { since=$1; shift; }
+if [ x"$since" = x"--" ]; then
     find_markdown_files
     since=`
         git rev-parse --abbrev-ref HEAD@{upstream} 2>/dev/null ||
@@ -39,6 +35,16 @@ else
         esac
     `
 fi
+# unless list of files are given, find Markdown documents in the Git repo
+if [ $# -gt 0 ]; then
+    files=("$@")
+elif [ ${#files[@]} -eq 0 ]; then
+    find_markdown_files
+fi
+
+# make sure ${files[@]} isn't empty
+[ ${#files[@]} -gt 0 ] || files+=(.)
+
 
 # summarize commit history
 {
