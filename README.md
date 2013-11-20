@@ -11,20 +11,26 @@ It can also summarize commit history of Markdown documents in a Git repository a
 
 ## Usage
 
-### Using [`wdiff`][]
+### Using GNU wdiff
 
-    wdiff old.md new.md | markdown-format-wdiff >changes.md
+```bash
+wdiff old.md new.md | markdown-format-wdiff >changes.md
+```
 
-### Using `git`
+### Using Git
 
-    markdown-git-changes HEAD~2 README.md >changes.md
+```bash
+markdown-git-changes HEAD~2 README.md >changes.md
+```
 
 
 ### Viewing the Annotated Diff
 
-    # use a Markdown preview app
-    open changes.md
-    # or, compile into HTML and view it
-    marked changes.md >changes.html
-    open changes.html
+```bash
+# use a Markdown preview app
+open changes.md
+# or, compile into HTML and view it
+marked changes.md >changes.html
+open changes.html
+```
 
