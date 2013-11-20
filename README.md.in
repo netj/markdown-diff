@@ -66,13 +66,13 @@ open changes.html
 ```markdown
 <$ cat old.md $>
 ```
-<$ cat old.md $>
+<$ cat old.md | sed 's|^|> |' $>
 
 ### new.md: After Revision
 ```markdown
 <$ cat new.md $>
 ```
-<$ cat new.md $>
+<$ cat new.md | sed 's|^|> |' $>
 
 ### Unified Diff
 Here's a unified diff of the two Markdown documents shown above.  It's very hard to even recognize that there're any differences between the two.
@@ -99,7 +99,7 @@ Finally, here's the word diff formatted by Markdown-Diff, which displays the cha
 ```bash
 wdiff old.md new.md | markdown-format-wdiff
 ```
-<$ wdiff old.md new.md | ../markdown-format-wdiff | tee changes.md $>
+<$ wdiff old.md new.md | ../markdown-format-wdiff | tee changes.md | sed 's|^|> |' $>
 
 
 
