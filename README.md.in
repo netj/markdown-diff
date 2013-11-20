@@ -66,11 +66,13 @@ open changes.html
 ```markdown
 <$ cat old.md $>
 ```
+<$ cat old.md $>
 
 ### new.md: After Revision
 ```markdown
 <$ cat new.md $>
 ```
+<$ cat new.md $>
 
 ### Unified Diff
 Here's a unified diff of the two Markdown documents shown above.  It's very hard to even recognize that there're any differences between the two.
