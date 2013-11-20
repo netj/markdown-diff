@@ -41,15 +41,19 @@
             <ul>
               
                 <li>
-                  <a href="#usage/using-gnu-wdiff">Using GNU wdiff</a>
+                  <a href="#usage/download-and-install-the-scripts">Download and Install the Scripts</a>
                 </li>
               
                 <li>
-                  <a href="#usage/using-git">Using Git</a>
+                  <a href="#usage/use-with-gnu-wdiff">Use with GNU wdiff</a>
                 </li>
               
                 <li>
-                  <a href="#usage/viewing-the-output">Viewing the Output</a>
+                  <a href="#usage/use-with-git">Use with Git</a>
+                </li>
+              
+                <li>
+                  <a href="#usage/view-the-output">View the Output</a>
                 </li>
               
             </ul>
@@ -96,11 +100,24 @@
 It reformats the output of <a href="http://www.gnu.org/software/wdiff/"><code>wdiff</code></a> or <code>git --word-diff</code> in Markdown, so the changes to a Markdown document can be viewed inline.
 It can also summarize commit history of Markdown documents in a Git repository as well as the changes made to them.</p>
 <h2 id='usage'>Usage</h2 id='usage'>
-<h3 id='usage/using-gnu-wdiff'>Using GNU wdiff</h3 id='usage/using-gnu-wdiff'>
+<h3 id='usage/download-and-install-the-scripts'>Download and Install the Scripts</h3 id='usage/download-and-install-the-scripts'>
+<ul>
+<li><a href="https://raw.github.com/netj/markdown-diff/master/markdown-format-wdiff">markdown-format-wdiff</a></li>
+<li><a href="https://raw.github.com/netj/markdown-diff/master/markdown-git-changes">markdown-git-changes</a></li>
+</ul>
+<p>Mark them as executable and put them in a directory that&#39;s on your <code>$PATH</code>, e.g., <code>~/bin/</code> or <code>/usr/local/bin/</code>, as shown in the following list of commands:</p>
+<pre><code class="lang-bash">curl -RL \
+     -O https://raw.github.com/netj/markdown-diff/master/markdown-format-wdiff \
+     -O https://raw.github.com/netj/markdown-diff/master/markdown-git-changes
+chmod +x markdown-format-wdiff markdown-git-changes
+mkdir -p ~/bin
+mv -f markdown-format-wdiff markdown-git-changes ~/bin/
+export PATH=~/bin:<span class="string">"<span class="variable">$PATH</span>"</span></code></pre>
+<h3 id='usage/use-with-gnu-wdiff'>Use with GNU wdiff</h3 id='usage/use-with-gnu-wdiff'>
 <pre><code class="lang-bash">wdiff old.md new.md | markdown-format-wdiff &gt;changes.md</code></pre>
-<h3 id='usage/using-git'>Using Git</h3 id='usage/using-git'>
+<h3 id='usage/use-with-git'>Use with Git</h3 id='usage/use-with-git'>
 <pre><code class="lang-bash">markdown-git-changes origin/master README.md &gt;changes.md</code></pre>
-<h3 id='usage/viewing-the-output'>Viewing the Output</h3 id='usage/viewing-the-output'>
+<h3 id='usage/view-the-output'>View the Output</h3 id='usage/view-the-output'>
 <pre><code class="lang-bash"><span class="comment"># use a Markdown preview app, such as Marked</span>
 open changes.md
 
