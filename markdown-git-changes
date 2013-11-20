@@ -83,3 +83,26 @@ sed '
     }
 ' |
 markdown-format-wdiff
+echo '
+<style>
+    pre:first-of-type { width: 78%; margin-left: auto; margin-right: auto; }
+    .file-start + p + pre,
+    .file-start + pre { margin-left: 61.8%; }
+    .file-start,
+    .hunk-start{ text-align: right; }
+
+    .file-start code{ font-size: inherit; }
+
+    .file-start/*:not(:first-of-type)*/{
+        font-size: 150%;
+        margin-top: 23.6%;
+        border-bottom: 1ex solid #ccc;
+        padding-bottom: 1ex;
+    }
+    .hunk-start{
+        margin-top: 2ex;
+        border-bottom: 1ex dashed #ccc;
+        padding-bottom: 1ex;
+    }
+</style>
+'
