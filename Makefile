@@ -1,8 +1,12 @@
 # Makefile for Markdown-Diff
 
-example/changes.md: example/old.md example/new.md
-	wdiff $^ | ./markdown-format-wdiff >$@
+# how to generate the example
+README.md: example/old.md example/new.md Makefile markdown-format-wdiff
 
+%: %.in buildkit/compile-xdocs
+	buildkit/compile-xdocs $<
+
+# GitHub Pages
 gh-pages-updated:
 	buildkit/update-gh-pages
 .PHONY: gh-pages-updated
