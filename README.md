@@ -11,20 +11,36 @@ It can also summarize commit history of Markdown documents in a Git repository a
 
 ## Usage
 
-### Using GNU wdiff
+### Download and Install the Scripts
+
+* [markdown-format-wdiff](https://raw.github.com/netj/markdown-diff/master/markdown-format-wdiff)
+* [markdown-git-changes](https://raw.github.com/netj/markdown-diff/master/markdown-git-changes)
+
+Mark them as executable and put them in a directory that's on your `$PATH`, e.g., `~/bin/` or `/usr/local/bin/`, as shown in the following list of commands:
+
+```bash
+curl -RL \
+     -O https://raw.github.com/netj/markdown-diff/master/markdown-format-wdiff \
+     -O https://raw.github.com/netj/markdown-diff/master/markdown-git-changes
+chmod +x markdown-format-wdiff markdown-git-changes
+mkdir -p ~/bin
+mv -f markdown-format-wdiff markdown-git-changes ~/bin/
+export PATH=~/bin:"$PATH"
+```
+
+### Use with GNU wdiff
 
 ```bash
 wdiff old.md new.md | markdown-format-wdiff >changes.md
 ```
 
-### Using Git
+### Use with Git
 
 ```bash
 markdown-git-changes origin/master README.md >changes.md
 ```
 
-
-### Viewing the Output
+### View the Output
 
 ```bash
 # use a Markdown preview app, such as Marked
