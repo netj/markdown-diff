@@ -10,4 +10,8 @@ set -eu
 #}
 
 mirror-master .
-compile-markdown .
+compile-markdown . name="${GitHubRepo#*/}"
+mv -f preview.html index.html
+git add index.html
+
+mirror-master example

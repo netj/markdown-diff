@@ -1,20 +1,181 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <script src="DocumentUp/documentup.min.js"></script>
-    <script>
-        DocumentUp.document({
-            afterRender: function(){
-                    var link = document.createElement("link");
-                    link.rel = "stylesheet";
-                    link.href = "styles.css";
-                    document.head.appendChild(link);
-                },
-            name: "markdown-diff",
-            repo: "netj/markdown-diff"
-        });
-    </script>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>markdown-diff</title>
+    
+    <link rel="stylesheet" type="text/css" href="http://documentup.com/stylesheets/screen.css">
+    
+    
+
+    
+
+    <!-- Typekit -->
+    
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            kitId: 'hjp0pft',
+            scriptTimeout: 3000
+          };
+          var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/( |^)wf-loading( |$)/g,"");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script");tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(a&&a!="complete"&&a!="loaded")return;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+        })();
+      </script>
+    
+<link rel="stylesheet" href="./styles.css">
   </head>
-  <body></body>
+  <body><div id="container">
+  <div id="nav">
+    
+      <div id="header">
+        <a href="#" id="logo">markdown-diff</a>
+      </div>
+    
+    <ul id="sections">
+      
+        <li>
+          <a href="#usage">Usage</a>
+          
+            <ul>
+              
+                <li>
+                  <a href="#usage/using-gnu-wdiff">Using GNU wdiff</a>
+                </li>
+              
+                <li>
+                  <a href="#usage/using-git">Using Git</a>
+                </li>
+              
+                <li>
+                  <a href="#usage/viewing-the-output">Viewing the Output</a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+        <li>
+          <a href="#an-example">An Example</a>
+          
+            <ul>
+              
+                <li>
+                  <a href="#an-example/old-md-before-revision">old.md: Before Revision</a>
+                </li>
+              
+                <li>
+                  <a href="#an-example/new-md-after-revision">new.md: After Revision</a>
+                </li>
+              
+                <li>
+                  <a href="#an-example/unified-diff">Unified Diff</a>
+                </li>
+              
+                <li>
+                  <a href="#an-example/word-diff">Word Diff</a>
+                </li>
+              
+                <li>
+                  <a href="#an-example/markdown-diff">Markdown-Diff</a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+    </ul>
+    
+    
+  </div>
+  <div id="content">
+    
+    <h1>Markdown-Diff</h1>
+<p>Markdown-Diff annotates word <a href="https://en.wikipedia.org/wiki/Diff">diff</a>s of <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> documents for easier review.
+It reformats the output of <a href="http://www.gnu.org/software/wdiff/"><code>wdiff</code></a> or <code>git --word-diff</code> in Markdown, so the changes to a Markdown document can be viewed inline.
+It can also summarize commit history of Markdown documents in a Git repository as well as the changes made to them.</p>
+<h2 id='usage'>Usage</h2 id='usage'>
+<h3 id='usage/using-gnu-wdiff'>Using GNU wdiff</h3 id='usage/using-gnu-wdiff'>
+<pre><code class="lang-bash">wdiff old.md new.md | markdown-format-wdiff &gt;changes.md</code></pre>
+<h3 id='usage/using-git'>Using Git</h3 id='usage/using-git'>
+<pre><code class="lang-bash">markdown-git-changes origin/master README.md &gt;changes.md</code></pre>
+<h3 id='usage/viewing-the-output'>Viewing the Output</h3 id='usage/viewing-the-output'>
+<pre><code class="lang-bash"><span class="comment"># use a Markdown preview app, such as Marked</span>
+open changes.md
+
+<span class="comment"># or, compile it into HTML and view with your web browser</span>
+npm -g install marked
+marked changes.md &gt;changes.html
+open changes.html</code></pre>
+<hr>
+<h2 id='an-example'>An Example</h2 id='an-example'>
+<h3 id='an-example/old-md-before-revision'>old.md: Before Revision</h3 id='an-example/old-md-before-revision'>
+<pre><code class="lang-markdown"><span class="header">#### A Example for markdown-diff</span>
+
+<span class="bullet">* </span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veinam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<span class="bullet">* </span><span class="emphasis">*Lorem ipsun dolar sit amet, consectetur asipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerciration ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit amin di est laborum.*</span>
+<span class="bullet">* </span><span class="strong">**Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temopr incidident ut labore et dolroe magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ilure dolor in reprehenderit in voluptate velit esse dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.**</span>
+<span class="bullet">* </span><span class="xml"><span class="tag">&lt;<span class="title">u</span>&gt;</span></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad nimin veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluputate velit esse cillum dolore eu nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<span class="xml"><span class="tag">&lt;/<span class="title">u</span>&gt;</span></span></code></pre>
+<h3 id='an-example/new-md-after-revision'>new.md: After Revision</h3 id='an-example/new-md-after-revision'>
+<pre><code class="lang-markdown"><span class="header">#### An Example for Markdown-Diff</span>
+
+<span class="bullet">* </span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<span class="bullet">* </span><span class="emphasis">*Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.*</span>
+<span class="bullet">* </span><span class="strong">**Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.**</span>
+<span class="bullet">* </span><span class="xml"><span class="tag">&lt;<span class="title">u</span>&gt;</span></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<span class="xml"><span class="tag">&lt;/<span class="title">u</span>&gt;</span></span></code></pre>
+<h3 id='an-example/unified-diff'>Unified Diff</h3 id='an-example/unified-diff'>
+<p>Here&#39;s a unified diff of the two Markdown documents shown above.  It&#39;s very hard to even recognize that there&#39;re any differences between the two.</p>
+<pre><code class="lang-bash">diff -u old.md new.md</code></pre>
+<pre><code class="lang-diff"><span class="header">--- old.md    2013-11-20 13:15:34.000000000 -0800</span>
+<span class="header">+++ new.md    2013-11-20 13:15:31.000000000 -0800</span>
+<span class="chunk">@@ -1,6 +1,6 @@</span>
+<span class="deletion">-#### A Example for markdown-diff</span>
+<span class="addition">+#### An Example for Markdown-Diff</span>
+
+<span class="deletion">-* Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veinam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+<span class="deletion">-* *Lorem ipsun dolar sit amet, consectetur asipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exerciration ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit amin di est laborum.*</span>
+<span class="deletion">-* **Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod temopr incidident ut labore et dolroe magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute ilure dolor in reprehenderit in voluptate velit esse dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.**</span>
+<span class="deletion">-* &lt;u&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad nimin veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluputate velit esse cillum dolore eu nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/u&gt;</span>
+<span class="addition">+* Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span>
+<span class="addition">+* *Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.*</span>
+<span class="addition">+* **Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.**</span>
+<span class="addition">+* &lt;u&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/u&gt;</span></code></pre>
+<h3 id='an-example/word-diff'>Word Diff</h3 id='an-example/word-diff'>
+<p>Here&#39;s a word diff of them generated by GNU wdiff, which is slightly better for spotting the changes, but still ugly.</p>
+<pre><code class="lang-bash">wdiff old.md new.md</code></pre>
+<pre><code class="lang-markdown"><span class="header">#### [-A-] {+An+} Example for [-markdown-diff-] {+Markdown-Diff+}</span>
+
+<span class="bullet">* </span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim [-veinam,-] {+veniam,+} quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+<span class="bullet">* </span><span class="emphasis">*Lorem [-ipsun dolar-] {+ipsum dolor+} sit amet, consectetur [-asipisicing-] {+adipisicing+} elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud [-exerciration-] {+exercitation+} ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit [-amin di-] {+anim id+} est laborum.*</span>
+<span class="bullet">* </span><span class="strong">**Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod [-temopr incidident-] {+tempor incididunt+} ut labore et [-dolroe-] {+dolore+} magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute [-ilure-] {+irure+} dolor in reprehenderit in voluptate velit esse {+cillum+} dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.**</span>
+<span class="bullet">* </span><span class="xml"><span class="tag">&lt;<span class="title">u</span>&gt;</span></span>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad [-nimin-] {+minim+} veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in [-voluputate-] {+voluptate+} velit esse cillum dolore eu {+fugiat+} nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<span class="xml"><span class="tag">&lt;/<span class="title">u</span>&gt;</span></span></code></pre>
+<h3 id='an-example/markdown-diff'>Markdown-Diff</h3 id='an-example/markdown-diff'>
+<p>Finally, here&#39;s the word diff formatted by Markdown-Diff, which displays the changes on top of the actually rendered document, making the review very productive.</p>
+<pre><code class="lang-bash">wdiff old.md new.md | markdown-format-wdiff</code></pre>
+<h4><del class="del">A</del> <ins class="ins">An</ins> Example for <del class="del">markdown-diff</del> <ins class="ins">Markdown-Diff</ins></h4>
+<ul>
+<li>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim <del class="del">veinam,</del> <ins class="ins">veniam,</ins> quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</li>
+<li><em>Lorem <del class="del">ipsun dolar</del> <ins class="ins">ipsum dolor</ins> sit amet, consectetur <del class="del">asipisicing</del> <ins class="ins">adipisicing</ins> elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud <del class="del">exerciration</del> <ins class="ins">exercitation</ins> ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit <del class="del">amin di</del> <ins class="ins">anim id</ins> est laborum.</em></li>
+<li><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod <del class="del">temopr incidident</del> <ins class="ins">tempor incididunt</ins> ut labore et <del class="del">dolroe</del> <ins class="ins">dolore</ins> magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute <del class="del">ilure</del> <ins class="ins">irure</ins> dolor in reprehenderit in voluptate velit esse <ins class="ins">cillum</ins> dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</strong></li>
+<li><u>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad <del class="del">nimin</del> <ins class="ins">minim</ins> veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in <del class="del">voluputate</del> <ins class="ins">voluptate</ins> velit esse cillum dolore eu <ins class="ins">fugiat</ins> nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</u></li>
+</ul>
+<style>
+    .del,.ins{ display: inline-block; margin-left: 0.5ex; }
+    .del     { background-color: #fcc; }
+         .ins{ background-color: #cfc; }
+</style>
+
+
+
+
+
+<hr>
+<div>
+<a href="https://github.com/netj/markdown-diff" id="github-ribbon"><img src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+</div>
+
+  </div>
+</div>
+</body>
 </html>
