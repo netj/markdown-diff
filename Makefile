@@ -7,6 +7,6 @@ README.md: example/old.md example/new.md Makefile markdown-format-wdiff
 	buildkit/compile-xdocs $<
 
 # GitHub Pages
-gh-pages-updated:
+gh-pages-updated: README.md
 	buildkit/update-gh-pages
 .PHONY: gh-pages-updated
