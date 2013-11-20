@@ -1,0 +1,3 @@
+[submodule "DocumentUp"]
+	path = DocumentUp
+	url = https://github.com/jeromegn/DocumentUp.git

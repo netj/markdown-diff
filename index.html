@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="DocumentUp/documentup.min.js"></script>
+    <script>
+        DocumentUp.document({
+            afterRender: function(){
+                    var link = document.createElement("link");
+                    link.rel = "stylesheet";
+                    link.href = "styles.css";
+                    document.head.appendChild(link);
+                },
+            name: "markdown-diff",
+            repo: "netj/markdown-diff"
+        });
+    </script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body></body>
+</html>

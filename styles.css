@@ -1,0 +1,30 @@
+/* Fixed nav bar for documents compiled by DocumentUp on desktops */
+@media screen and (min-width: 1025px) {
+#nav {
+    position: fixed;
+    width: 230px;
+    top: 0; bottom: 0;
+    overflow-y: auto;
+}
+#content {
+    margin-left: 260px;
+    text-align: justify;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    padding-bottom: 30%;
+}
+#content pre, #content code, #content tt {
+    hyphens: manual;
+    -webkit-hyphens: manual;
+    -moz-hyphens: manual;
+}
+#content h2 {
+    margin-top: 1em;
+}
+#content hr {
+    width: 75%;
+    margin-top:    7.5em;
+    margin-bottom: 7.5em;
+}
+}
