@@ -102,5 +102,3 @@ wdiff old.md new.md | markdown-format-wdiff
 <$ wdiff old.md new.md | ../markdown-format-wdiff | tee changes.md | sed 's|^|> |' $>
 
 
-
-----

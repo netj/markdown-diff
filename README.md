@@ -159,5 +159,3 @@ wdiff old.md new.md | markdown-format-wdiff
 
 
 
-
-----
